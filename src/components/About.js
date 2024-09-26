@@ -2,38 +2,54 @@ import { Box, Button, Dialog, DialogContent, DialogTitle, IconButton } from '@mu
 import React, { useState } from 'react'
 import { FaPen} from 'react-icons/fa'
 import { IoCloseCircleOutline } from 'react-icons/io5';
+import Editor from './Editor';
+import TextComponent from "./TextComponent";
 
 const About = () => {
 
-  const[open1, setOpen1] = useState(false);
   const[open2, setOpen2] = useState(false);
   const[website, setWebsite] = useState("");
   const[year, setYear] = useState("");
   const[industry, setIndustry] = useState("");
   const[location, setLocation] = useState("");
-  const[data, setData] = useState("");
+  const [openEditor, setOpenEditor] = useState(false);
+  const [editorContent, setEditorContent] = useState("");
 
-  const handleClose1 = () => {
-    setOpen1(false);
-  }
   const handleAbout = () => {
-    setOpen1(true);
+    handleOpenEditor();
   }
+
+  const handleCloseEditor = () => {
+    setOpenEditor(false);
+  };
+
+  const handleOpenEditor = () => {
+    setOpenEditor(true);
+  };
   const handleDetails = () => {
     setOpen2(true);
   }
 
+  const handleDetailSave = (e) => {
+    e.preventDefault();
+    // setWebsite(e.website);
+    // setYear(e.year);
+    // setIndustry(e.industry);
+    // setLocation(e.location);
+
+    setOpen2(false);
+  }
+
   const handleClose2 = () => {
+    setWebsite('');
+    setYear('');
+    setIndustry('');
+    setLocation('');
     setOpen2(false);
   }
 
   const isFormValid = () => {
     return website && year && industry && location;
-  };
-  const validData = () => {
-    if(data){
-      return true;
-    }
   };
 
   return (
@@ -44,35 +60,15 @@ const About = () => {
             <FaPen className='text-pink-500 w-5 h-5'/>
           </IconButton>
         </div>
-        <p className="text-gray-600 text-left">
-          {
-            data.length>0 ? data : 
-            "Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo."
-          }
+        
+        <p className="text-gray-600 text-left" dangerouslySetInnerHTML={{ 
+          __html: editorContent || 
+            "Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo. Make Better Life With Trusted CryptoCoin. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo." 
+        }}>
         </p>
 
-        <Dialog open={open1} onClose={handleClose1} maxWidth="md" fullWidth>
-          <DialogTitle className='flex justify-between items-center text-center text-white text-sm bg-gray-800'>
-            <img src="./ikonwork.jpg" alt="logo1" width={40} />
-            <h1>Edit Company About</h1>
-            <IoCloseCircleOutline size={32} onClick={handleClose1} className='cursor-pointer'/>
-          </DialogTitle>
+        <Editor open={openEditor} onClose={handleCloseEditor} editorContent={editorContent} setEditorContent={setEditorContent} />
 
-          <DialogContent className='flex flex-col gap-3'>
-            <input 
-              placeholder='About the company' 
-              type='text' 
-              required
-              value={data}
-              onChange={(e) => setData(e.target.value)}
-              className='border-[1px] mt-5 border-black rounded-sm p-1'
-            />
-            <Button onClick={handleClose1} variant='contained' size='small' sx={{ backgroundColor: 'black', color: 'white' }} disabled={!validData()}>
-              Save
-            </Button>
-          </DialogContent>
-        
-        </Dialog>
 
         {/* Details Section */}
         <div className="mt-6">
@@ -112,44 +108,21 @@ const About = () => {
           </DialogTitle>
 
           <DialogContent className='flex flex-col gap-3'>
-            <input 
-              placeholder='Website' 
-              type='text' 
-              required
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              className='border-[1px] mt-5 border-black rounded-sm p-1'
-            />
-            <input 
-              placeholder='Established Year' 
-              type='number' 
-              required
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              className='border-[1px] border-black rounded-sm p-1'
-            />
-            <input 
-              placeholder='Industry' 
-              type='text' 
-              required
-              value={industry}
-              onChange={(e) => setIndustry(e.target.value)}
-              className='border-[1px] border-black rounded-sm p-1'
-            />
-            <input 
-              placeholder='Head office Location' 
-              type='text' 
-              required
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className='border-[1px] border-black rounded-sm p-1'
-            />
-            <Button onClick={handleClose2} variant='contained' size='small' sx={{ backgroundColor: 'black', color: 'white' }} disabled={!isFormValid()}>
+            
+            <div className='flex flex-col mt-4 gap-3'>
+              <TextComponent placeHolder={"website"} type={"text"} value={website} setValue={setWebsite}/>
+              <TextComponent placeHolder={"Established Year"} type={"number"} value={year} setValue={setYear}/>
+              <TextComponent placeHolder={"Industry"} type={"text"} value={industry} setValue={setIndustry}/>
+              <TextComponent placeHolder={"Head Office Location"} type={"text"} value={location} setValue={setLocation}/>
+            </div>
+
+            <Button onClick={(e) => handleDetailSave(e)} variant='contained' size='small' sx={{ backgroundColor: 'black', color: 'white' }} disabled={!isFormValid()}>
               Save
             </Button>
           </DialogContent>
         
         </Dialog>
+
 
       </Box>
   )

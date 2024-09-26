@@ -6,7 +6,7 @@ import { TabsComponent } from './TabsComponent'
 const Main = () => {
   return (
     <div className='flex gap-10 mx-[6vw]'>
-        <div className='flex flex-col w-[60vw] gap-10 mx-[2vw]'>
+        <div className='flex flex-col w-[60vw] gap-10 mx-[2vw] mb-8'>
             <Profile/>
             <TabsComponent/>
         </div>

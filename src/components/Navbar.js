@@ -16,14 +16,17 @@ const Navbar = () => {
 
 
   return (
-    <div className='bg-gray-900 h-[9vh] text-white flex justify-around items-center pt-4 pb-4 '>
+    <div className='bg-gray-900  text-white flex justify-around items-center pt-4 pb-4 '>
       
         {/* logo */}
         <div className='flex gap-12 items-center'>
           
           <div className='flex items-center gap-2'>
-              <img src="/ikonwork.jpg" alt="" width={50} height={100} />
-              <a href="https://www.ikonwork.com/">IKONWORK</a>
+              {/* <img src="/ikonwork.jpg" alt="" width={50} height={100} />
+              <a href="https://www.ikonwork.com/">IKONWORK</a> */}
+              <a href="https://www.ikonwork.com/">
+                <img src="https://qc-ikonwork.com/_next/static/media/logowhitenew.4a788e4d.svg" alt="Ikonwork" width={144} height={44} />
+              </a>
           </div>
 
           {/* search */}
@@ -106,16 +109,16 @@ const Navbar = () => {
 
         {/* links */}
         <ul className='flex gap-10 items-center justify-center'>
-            <li className='flex flex-col justify-center items-center'>
+            <li className='flex flex-col justify-center items-center hover:text-pink-300'>
                 <IoHomeOutline  size={22}/>
                 <a href="/" className='mt-1'>
                   Home
                 </a>
             </li>
-            <li className='flex flex-col justify-center items-center'><IoLinkOutline  size={26}/><a href="/" className='mt-1'>Link Up</a></li>
-            <li className='flex flex-col justify-center items-center'><IoBagAddOutline size={24}/><a href="/" className='mt-1'>Jobs</a></li>
-            <li className='flex flex-col justify-center items-center'><LuMessageSquare  size={22}/><a href="/" className='mt-1'>Messages</a></li>
-            <li className='flex flex-col justify-center items-center'><HiOutlineBellAlert  size={26}/><a href="/" className='mt-1'>Notifications</a></li>
+            <li className='flex flex-col justify-center items-center hover:text-pink-300'><IoLinkOutline  size={26}/><a href="/" className='mt-1'>Link Up</a></li>
+            <li className='flex flex-col justify-center items-center hover:text-pink-300'><IoBagAddOutline size={24}/><a href="/" className='mt-1'>Jobs</a></li>
+            <li className='flex flex-col justify-center items-center hover:text-pink-300'><LuMessageSquare  size={22}/><a href="/" className='mt-1'>Messages</a></li>
+            <li className='flex flex-col justify-center items-center hover:text-pink-300'><HiOutlineBellAlert  size={26}/><a href="/" className='mt-1'>Notifications</a></li>
             
             <li className='flex flex-col justify-center items-center'>
               <Avatar 
